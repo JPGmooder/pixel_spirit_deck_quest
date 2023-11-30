@@ -21,14 +21,9 @@ float fill(float figure, float size)
     return 1. - step(size, figure);
 }
 
-float drawCircle(vec2 center, vec2 st)
+float drawDiamond(vec2 st, vec2 center)
 {
-    return distance(center, st);
-}
-
-float drawTriangle(vec2 st, vec2 center)
-{
-   float result = max(abs(st.x - center.x) * 1.6 + (st.y - center.y) , -(st.y - center.y)  );
+   float result = max(abs(st.x - center.x) * 1.6 + abs(st.y - center.y) , -(st.y - center.y)  );
    return result;
 }
 
@@ -37,11 +32,10 @@ void main() {
     vec2 st = gl_FragCoord.xy / u_resolution.xy;
     st = st * 2. -1.; 
 
-    float circle = drawCircle(vec2(0.,0.2), st);
-    float triangle = drawTriangle(st, vec2(0., -0.2));
+    float diamond = drawDiamond(st, vec2(0., -0.));
 
-    vec3 color = vec3(stroke(circle, 0.35, 0.04));
-    color *= step(0.4, triangle);
-    color += fill(triangle, 0.35);
+    vec3 color = vec3(fill(diamond, 0.35));
+    color += stroke(diamond, 0.43, 0.03);
+    color += stroke(diamond, 0.5, 0.02);
     gl_FragColor = vec4(color, 1.0);
 }
