@@ -35,7 +35,9 @@ void main() {
     float diamond = drawDiamond(st, vec2(0., -0.));
 
     vec3 color = vec3(fill(diamond, 0.35));
-    color += stroke(diamond, 0.43, 0.03);
+    color += fract( stroke(diamond, 0.43, 0.));
     color += stroke(diamond, 0.5, 0.02);
     gl_FragColor = vec4(color, 1.0);
 }
+
+   

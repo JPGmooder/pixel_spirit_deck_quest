@@ -36,8 +36,8 @@ void main() {
     float krest = drawKrest(st, 1.);
     float rect = drawRect(st, vec2(1.));
     vec3  color = vec3( fill(rect, 0.5));
-    color *= step(0.4, fract(krest * 4.));
-    color *= step(1. , krest);
+    color *= step(0.5, fract(krest * 3. + u_time));
+    color *= step(.9 , krest);
     color += vec3(fill(krest, 0.5)); // крест внутри
     color  += vec3(drawLine(drawRect(st, vec2(1.)), 0.8, 0.02)); // внешняя обводка
     color  += vec3(drawLine(drawRect(st, vec2(1.)), 0.7, 0.05)); // внутренняя обводка
